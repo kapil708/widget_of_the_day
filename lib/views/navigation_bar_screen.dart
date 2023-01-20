@@ -10,6 +10,8 @@ class NavigationBarScreen extends StatefulWidget {
 class _NavigationBarScreenState extends State<NavigationBarScreen> {
   int currentPageIndex = 0;
 
+  List<Color> colorList = [Colors.blue,Colors.green,Colors.purple];
+
   List widgets = <Widget>[
     Container(
       color: Colors.blue,
@@ -40,6 +42,11 @@ class _NavigationBarScreenState extends State<NavigationBarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("NavigationBar"),
+        backgroundColor: colorList[currentPageIndex],
+        elevation: 0,
+      ),
       body: widgets[currentPageIndex],
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
