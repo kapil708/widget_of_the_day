@@ -6,7 +6,7 @@ import '../common/constaint.dart';
 
 // ignore: must_be_immutable
 class AutoCompleteScreen extends StatelessWidget {
-  AutoCompleteScreen({Key? key}) : super(key: key);
+  const AutoCompleteScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
