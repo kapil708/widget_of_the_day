@@ -17,10 +17,10 @@ class AutoCompleteScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /*///Option 1
+            ///Option 1
             stringBaseDropDown(),
             const SizedBox(height: 40),
-*/
+
             ///Option 2
             classBaseDropDown(),
           ],
