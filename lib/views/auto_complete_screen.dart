@@ -17,10 +17,10 @@ class AutoCompleteScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ///Option 1
+            /*///Option 1
             stringBaseDropDown(),
             const SizedBox(height: 40),
-
+*/
             ///Option 2
             classBaseDropDown(),
           ],
@@ -118,7 +118,25 @@ Widget classBaseDropDown() {
                         return Container(
                           color: highlight ? Theme.of(context).focusColor : null,
                           padding: const EdgeInsets.all(16.0),
-                          child: Text(fullName),
+                          child: Row(
+                            children: [
+                              ClipOval(
+                                child: Image.network(
+                                  user.picture.thumbnail,
+                                  height: 24,
+                                  width: 24,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                fullName,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
                         );
                       }),
                     );
@@ -136,9 +154,7 @@ Widget classBaseDropDown() {
           return TextFormField(
             controller: textEditingController,
             focusNode: focusNode,
-            onFieldSubmitted: (String value) {
-              onFieldSubmitted();
-            },
+            onFieldSubmitted: (String value) => onFieldSubmitted(),
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderSide: const BorderSide(width: 3, color: Colors.greenAccent),
@@ -155,17 +171,20 @@ Widget classBaseDropDown() {
 class User {
   late Name name;
   late String phone;
+  late Picture picture;
 
-  User({required this.name, required this.phone});
+  User({required this.name, required this.phone, required this.picture});
 
   User.fromJson(Map<String, dynamic> json) {
     name = Name.fromJson(json['name']);
+    picture = Picture.fromJson(json['picture']);
     phone = json['phone'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name.toJson();
+    data['picture'] = picture!.toJson();
     data['phone'] = phone;
     return data;
   }
@@ -189,6 +208,28 @@ class Name {
     data['title'] = title;
     data['first'] = first;
     data['last'] = last;
+    return data;
+  }
+}
+
+class Picture {
+  late String large;
+  late String medium;
+  late String thumbnail;
+
+  Picture({required this.large, required this.medium, required this.thumbnail});
+
+  Picture.fromJson(Map<String, dynamic> json) {
+    large = json['large'];
+    medium = json['medium'];
+    thumbnail = json['thumbnail'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['large'] = large;
+    data['medium'] = medium;
+    data['thumbnail'] = thumbnail;
     return data;
   }
 }
